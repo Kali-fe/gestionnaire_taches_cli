@@ -19,7 +19,6 @@ abstract class Repository<T> {
   void charger();
 }
 
-// Implémentation concrète avec Génériques <T extends Task>
 class TaskRepository implements Repository<Task> {
   final String cheminFichier;
   List<Task> _taches = [];
