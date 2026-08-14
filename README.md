@@ -89,3 +89,4 @@ dart test
 5.  **Test 5 :** Le mécanisme de persistance encode et décode sans perte les objets complexes (différenciation entre tâche urgente et standard lors de la lecture du fichier JSON).
 
 *Note : Lors du lancement des tests, un fichier temporaire nommé `taches_test.json` est créé, exploité pour les vérifications, puis automatiquement nettoyé afin de ne pas polluer votre espace de travail.*
+# gestionnaire_taches_cli
