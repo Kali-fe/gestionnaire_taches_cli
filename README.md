@@ -4,7 +4,7 @@ Bienvenue dans l'application de gestion de tâches en ligne de commande (CLI) é
 
 ---
 
-## 🚀 Fonctionnalités Majeures
+## Fonctionnalités Majeures
 
 *   **Gestion complète des tâches (CRUD) :** Ajout de tâches standards ou urgentes, marquage comme terminé, et suppression.
 *   **Système de Tri intelligent :** Visualisation de la liste des tâches par ordre chronologique (date limite) ou par niveau d'importance (priorité).
@@ -13,7 +13,7 @@ Bienvenue dans l'application de gestion de tâches en ligne de commande (CLI) é
 
 ---
 
-## 🛠️ Architecture & Concepts Clés Validés
+## Architecture & Concepts Clés Validés
 
 L'application démontre la maîtrise des concepts suivants :
 1.  **Classes abstraites & Héritage :** Classe de base `Task` déclinée en `StandardTask` (priorité variable) et `UrgentTask` (priorité forcée à *High* avec notes d'urgence).
@@ -23,7 +23,7 @@ L'application démontre la maîtrise des concepts suivants :
 
 ---
 
-## 📂 Structure du Projet
+##  Structure du Projet
 
 ```text
 ├── bin/
@@ -39,7 +39,7 @@ L'application démontre la maîtrise des concepts suivants :
 
 ---
 
-## ⚙️ Prérequis & Installation
+##  Prérequis & Installation
 
 ### 1. Installer le SDK Dart
 Assurez-vous que Dart est installé sur votre machine. Vous pouvez vérifier sa présence en exécutant dans votre terminal :
@@ -55,7 +55,7 @@ dart pub get
 
 ---
 
-## 🕹️ Mode d'Emploi de l'Application (CLI)
+##  Mode d'Emploi de l'Application (CLI)
 
 Pour lancer le gestionnaire de tâches et interagir avec le menu dans votre console, exécutez la commande suivante :
 
@@ -71,7 +71,7 @@ dart run bin/main.dart
 
 ---
 
-## 🧪 Exécution des Tests Unitaires
+##  Exécution des Tests Unitaires
 
 La suite de tests vérifie l'intégrité du système de stockage, les restrictions de validation des données, le comportement des états et le cycle de vie de la sérialisation JSON.
 
