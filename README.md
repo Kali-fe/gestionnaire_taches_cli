@@ -4,7 +4,7 @@ Bienvenue dans l'application de gestion de tâches en ligne de commande (CLI) é
 
 ---
 
-## Fonctionnalités Majeures
+##  Fonctionnalités Majeures
 
 *   **Gestion complète des tâches (CRUD) :** Ajout de tâches standards ou urgentes, marquage comme terminé, et suppression.
 *   **Système de Tri intelligent :** Visualisation de la liste des tâches par ordre chronologique (date limite) ou par niveau d'importance (priorité).
@@ -23,7 +23,7 @@ L'application démontre la maîtrise des concepts suivants :
 
 ---
 
-##  Structure du Projet
+##  Structure du Projet (Mise à jour : Architecture de Tests Modulaire)
 
 ```text
 ├── bin/
@@ -32,7 +32,12 @@ L'application démontre la maîtrise des concepts suivants :
 │   ├── task_model.dart      # Modèles de données, Abstraction et Interfaces
 │   └── task_repository.dart # Dépôt générique, gestion JSON et Exceptions
 ├── test/
-│   └── task_test.dart       # Les 5 scénarios de tests unitaires automatisés
+│   ├── test_helper.dart     # Centralisation du cycle de vie du fichier de test
+│   ├── task_ajout_test.dart        # Test 1 : Validation de l'ajout
+│   ├── task_validation_test.dart   # Test 2 : Saisie de titre vide
+│   ├── task_termine_test.dart      # Test 3 : Changement de statut (complété)
+│   ├── task_suppression_test.dart  # Test 4 : Suppression par identifiant
+│   └── task_persistance_test.dart  # Test 5 : Cycle d'encodage/décodage JSON
 ├── pubspec.yaml             # Gestionnaire de dépendances du projet
 └── taches.json              # Fichier de données généré à l'exécution
 ```
@@ -71,22 +76,20 @@ dart run bin/main.dart
 
 ---
 
-##  Exécution des Tests Unitaires
+##  Exécution de la Suite de Tests
 
-La suite de tests vérifie l'intégrité du système de stockage, les restrictions de validation des données, le comportement des états et le cycle de vie de la sérialisation JSON.
+Grâce à notre architecture modulaire, la suite de tests est répartie dans plusieurs fichiers indépendants mais connectés via un utilitaire commun (`test_helper.dart`). Cet utilitaire garantit l'isolation de chaque scénario en nettoyant l'environnement de stockage de manière transparente.
 
-Pour lancer les 5 tests automatisés, utilisez la commande standard de l'écosystème Dart :
-
+### Exécuter l'intégralité des tests
+Pour lancer tous les fichiers de tests unitaires présents dans le dossier `test/` de manière séquentielle, utilisez la commande globale :
 ```bash
-dart test
+dart test -j 1
+
 ```
 
-### Ce que valident les tests inclus :
-1.  **Test 1 :** L'ajout réussi d'une tâche valide étend correctement la taille du tableau en mémoire.
-2.  **Test 2 :** L'application lève une exception personnalisée (`TaskException`) si l'utilisateur tente d'enregistrer une tâche sans titre ou composée uniquement d'espaces.
-3.  **Test 3 :** La mise à jour du statut passe correctement la propriété booléenne de la tâche à `true`.
-4.  **Test 4 :** La suppression d'un ID valide purge la donnée du dépôt.
-5.  **Test 5 :** Le mécanisme de persistance encode et décode sans perte les objets complexes (différenciation entre tâche urgente et standard lors de la lecture du fichier JSON).
-
-*Note : Lors du lancement des tests, un fichier temporaire nommé `taches_test.json` est créé, exploité pour les vérifications, puis automatiquement nettoyé afin de ne pas polluer votre espace de travail.*
-# gestionnaire_taches_cli
+### Exécuter un seul fichier de test spécifique
+Si vous souhaitez isoler vos vérifications sur un seul module pendant votre développement, vous pouvez cibler directement le fichier souhaité. Exemples :
+```bash
+dart test test/task_ajout_test.dart
+dart test test/task_validation_test.dart
+```
