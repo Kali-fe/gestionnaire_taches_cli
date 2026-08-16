@@ -4,7 +4,7 @@ import '../lib/task_repository.dart';
 
 void main() {
   final repo = TaskRepository();
-  
+
   try {
     repo.charger();
   } catch (e) {
@@ -21,18 +21,22 @@ void main() {
     print("4. Supprimer une tâche");
     print("5. Quitter");
     stdout.write("Sélectionnez une option (1-5) : ");
-    
+
     String? choix = stdin.readLineSync();
 
     switch (choix) {
       case '1':
         ajouterTacheInterface(repo);
+        break;
       case '2':
         listerTachesInterface(repo);
+        break;
       case '3':
         marquerTacheInterface(repo);
+        break;
       case '4':
         supprimerTacheInterface(repo);
+        break;
       case '5':
         print("Au revoir !");
         exit(0);
@@ -62,8 +66,10 @@ void ajouterTacheInterface(TaskRepository repo) {
     } else {
       print("Priorité : 1. Low  2. Medium  3. High");
       String prioChoix = stdin.readLineSync() ?? "1";
-      Priorite prio = prioChoix == '2' ? Priorite.medium : (prioChoix == '3' ? Priorite.high : Priorite.low);
-      
+      Priorite prio = prioChoix == '2'
+          ? Priorite.medium
+          : (prioChoix == '3' ? Priorite.high : Priorite.low);
+
       repo.ajouter(StandardTask(id: id, titre: titre, priorite: prio, dateLimite: dateLimite));
       print("Tâche standard ajoutée avec succès !");
     }
@@ -75,7 +81,7 @@ void ajouterTacheInterface(TaskRepository repo) {
 void listerTachesInterface(TaskRepository repo) {
   print("\nTri : 1. Aucun  2. Par Priorité  3. Par Date Limite");
   String triChoix = stdin.readLineSync() ?? "1";
-  
+
   List<Task> liste;
   if (triChoix == '2') {
     liste = repo.listerTrieParPriorite();
@@ -93,8 +99,12 @@ void listerTachesInterface(TaskRepository repo) {
   print("\n--- LISTE DES TÂCHES ---");
   for (var t in liste) {
     String statut = t.estTerminee ? "[✔]" : "[ ]";
-    String dateStr = t.dateLimite != null ? " (Échéance: ${t.dateLimite!.toIso8601String().split('T')[0]})" : "";
-    String infoUrgence = t is UrgentTask ? " [URGENT: ${t.notesUrgence}]" : " [Priorité: ${t.priorite.name}]";
+    String dateStr = t.dateLimite != null
+        ? " (Échéance: ${t.dateLimite!.toIso8601String().split('T')[0]})"
+        : "";
+    String infoUrgence = t is UrgentTask
+        ? " [URGENT: ${t.notesUrgence}]"
+        : " [Priorité: ${t.priorite.name}]";
     print("$statut ID: ${t.id} | ${t.titre}$infoUrgence$dateStr");
   }
 }
